@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ScaleFilter></ScaleFilter>
+    <GuitarNeck v-bind:stringsNumber="6" v-bind:freatsNumber="18"></GuitarNeck>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import GuitarNeck from './components/GuitarNeck.vue';
+import ScaleFilter from './components/ScaleFilter.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    GuitarNeck,
+    ScaleFilter
   }
 }
 </script>
