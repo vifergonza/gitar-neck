@@ -23,14 +23,15 @@
                             </option>
                         </select>
                     </div>
-
+                    <!--
                     <div>
                         <input type="checkbox" :value="selected.pentatonic" v-model="selected.pentatonic" id="pentatonicCheck"/>
                         <label for="pentatonicCheck">Pentatonic</label>
                     </div>
-
+                    -->
                     <div>
                         <input type="submit" value="Show on neck">
+                        <button v-on:click="clear()">Clear</button>
                     </div>
                 </div>
             </fieldset>
@@ -88,8 +89,21 @@ export default {
             }
         },
         getScale: function(_scale, _tonic, _pentatonic) {
-            console.log(_scale, _tonic, _pentatonic);
+            console.log('vfg apply pentatonic', _scale, _tonic, _pentatonic);
             return _scale.getScale(_tonic);
+        },
+        submit: function() {
+            if (this.result) {
+                this.$emit('applyScale', this.result);
+            }
+        },
+        clear: function() {
+            this.selected.scale = null;
+            this.selected.tonic = null,
+            this.selected.pentatonic = false;
+            this.messages = null;
+            this.result = null;
+            this.$emit('applyScale', this.result);
         }
     },
     watch: {

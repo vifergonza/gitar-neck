@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <ScaleFilter></ScaleFilter>
-    <GuitarNeck v-bind:stringsNumber="6" v-bind:freatsNumber="18"></GuitarNeck>
+    <ScaleFilter @applyScale="updateScale"></ScaleFilter>
+    <GuitarNeck v-bind:stringsNumber="6" v-bind:freatsNumber="18" v-bind:scale="currentScale"></GuitarNeck>
   </div>
 </template>
 
@@ -14,6 +14,16 @@ export default {
   components: {
     GuitarNeck,
     ScaleFilter
+  },
+  data: function() {
+    return {
+      currentScale: null
+    };
+  },
+  methods: {
+    updateScale(value) {
+      this.currentScale= value;
+    }
   }
 }
 </script>

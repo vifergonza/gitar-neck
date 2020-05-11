@@ -26,7 +26,7 @@ function initScales() {
     var tempScales = [];
     tempScales.push(new Scale('Major - Ionian', [2, 2, 1, 2, 2, 2, 1]));
     tempScales.push(new Scale('Natural Minor - Aeolian', [2, 1, 2, 2, 1, 2, 2]));
-    tempScales.push(new Scale('Harmonic Minor - Aeolian #7', [2, 1, 2, 2, 1, 2, 1]));
+    tempScales.push(new Scale('Harmonic Minor - Aeolian #7', [2, 1, 2, 2, 1, 3, 1]));
     return tempScales;
 }
 
