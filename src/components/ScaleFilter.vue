@@ -34,21 +34,21 @@
                         <button v-on:click="clear()">Clear</button>
                     </div>
                 </div>
+                <div class="result">
+                    <ul v-if="result" class="result-scale">
+                        <li v-for="(note, index) in result" v-bind:key="index">
+                            {{ note.name }}
+                        </li>
+                    </ul>
+                    <ul v-if="messages">
+                        <li v-for="(message, index) in messages" v-bind:key="index">
+                            {{ message }}
+                        </li>
+                    </ul>
+                </div>
             </fieldset>
         </form>
 
-        <div class="result">
-            <ul v-if="result" class="result-scale">
-                <li v-for="(note, index) in result" v-bind:key="index">
-                    {{ note.name }}
-                </li>
-            </ul>
-            <ul v-if="messages">
-                <li v-for="(message, index) in messages" v-bind:key="index">
-                    {{ message }}
-                </li>
-            </ul>
-        </div>
     </div>
 </template>
 

@@ -22,6 +22,23 @@
                      </span>
                 </div>
             </div>
+            <div class="neck-string freat-mark">
+                <div class="neck-freat" v-for="(freat, freat_index) in freatsNumber" v-bind:key="freat_index">
+                    <span v-if="[3, 5, 7, 9, 15, 17, 19, 21].some(x=> x === freat_index)">
+                        <svg height="10" width="10">
+                            <circle cx="5" cy="5" r="4" stroke="black" stroke-width="1" fill="red" />
+                        </svg> 
+                     </span>
+                     <span v-if="freat_index == 12">
+                        <svg height="10" width="10">
+                            <circle cx="5" cy="5" r="4" stroke="black" stroke-width="1" fill="red" />
+                        </svg>
+                        <svg height="10" width="10">
+                            <circle cx="5" cy="5" r="4" stroke="black" stroke-width="1" fill="red" />
+                        </svg> 
+                     </span>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -116,6 +133,12 @@ export default {
 
     .neck-container {
         background-color: #FDD998;
+        border-top: 3px solid brown;
+        border-bottom: 3px solid brown;
+        border-right: 1px solid brown;
+        border-left: 3px solid brown;
+        border-radius: 5px;
+        display: inline-block;  
     }
 
     .neck-string {
@@ -134,10 +157,20 @@ export default {
         background-color: #FFFFFF;
     }
 
-    div.neck-string div.neck-freat.in-mask {
+    div.neck-string div.neck-freat.in-mask{
         background-color: #d0ff80;
     }
     
+    div.neck-string.freat-mark,
+    div.neck-string.freat-mark div.neck-freat:first-of-type {
+        background-color: rgb(209, 156, 58)
+    }
+
+    div.neck-string.freat-mark .neck-freat {
+        padding-top: unset;
+        padding-bottom: unset;
+    }
+
     div.neck-container.scale .neck-freat:not(:first-of-type) span {
         opacity: 0.3;
     }
@@ -149,4 +182,5 @@ export default {
     div.neck-container.scale .neck-freat span.is-tonic {
         font-weight: bolder;
     }
+
 </style>
