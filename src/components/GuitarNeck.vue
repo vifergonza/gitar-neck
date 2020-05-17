@@ -7,8 +7,6 @@
                     {{ mask.name }}
                 </option>
             </select>
-        </div>
-        <div>
             <button v-on:click="decreaseOffset()">&lt;</button>
             <button v-on:click="increaseOffset()">&gt;</button>
             <button v-on:click="clear()">Clear</button>
@@ -128,15 +126,16 @@ export default {
 <style scoped>
     
     .guitar-neck {
-        padding: 20px;
+        margin: auto;
+        width: 1000px;
     }
 
     .neck-container {
-        background-color: #FDD998;
-        border-top: 3px solid brown;
-        border-bottom: 3px solid brown;
-        border-right: 1px solid brown;
-        border-left: 3px solid brown;
+        background-color: #F5616C;
+        border-top: 3px solid #AA530E;
+        border-bottom: 3px solid #AA530E;
+        border-right: 1px solid #AA530E;
+        border-left: 3px solid #AA530E;
         border-radius: 5px;
         display: inline-block;  
     }
@@ -150,7 +149,7 @@ export default {
         padding: 10px;
         width: 30px;
         text-align: center;
-        border-right: 2px solid brown;
+        border-right: 2px solid #AA530E;
     }
 
     .neck-string .neck-freat:first-of-type {
@@ -158,7 +157,7 @@ export default {
     }
 
     div.neck-string div.neck-freat.in-mask{
-        background-color: #d0ff80;
+        background-color: #DF1903;
     }
     
     div.neck-string.freat-mark,

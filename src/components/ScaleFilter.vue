@@ -1,52 +1,60 @@
 <template>
-    <div>
+    <div class="scale-filter">
+        <h1>Scale builder</h1>
         <form class="scale-builder" @submit.prevent="submit">
-
-            <fieldset>
-                <legend>Scale builder</legend>
-
-                <div>
-                    <div>
-                        <span>Scale</span>            
+            <div>
+                <div class="form-control">
+                    <div>Scale type</div>  
+                    <div class="select">       
                         <select v-model="selected.scale">
-                             <option v-for="(scale, index) in scales" v-bind:value="scale" v-bind:key="index">
+                            <option value="" disabled selected>Select type</option>
+                            <option v-for="(scale, index) in scales" v-bind:value="scale" v-bind:key="index">
                                 {{ scale.name }}
                             </option>
                         </select>
+                        <div class="select_arrow">
+                        </div>
                     </div>
-
-                    <div>
-                        <span>Tonic</span>            
+                </div>
+                <div class="form-control">
+                    <div>Tonic</div>            
+                    <div class="select">
                         <select v-model="selected.tonic">
                             <option v-for="(note, index) in tonics" v-bind:value="note" v-bind:key="index">
                                 {{ note.name }}
                             </option>
                         </select>
-                    </div>
-                    <!--
-                    <div>
-                        <input type="checkbox" :value="selected.pentatonic" v-model="selected.pentatonic" id="pentatonicCheck"/>
-                        <label for="pentatonicCheck">Pentatonic</label>
-                    </div>
-                    -->
-                    <div>
-                        <input type="submit" value="Show on neck">
-                        <button v-on:click="clear()">Clear</button>
+                        <div class="select_arrow">
+                        </div>
                     </div>
                 </div>
-                <div class="result">
+                <!--
+                <div>
+                    <input type="checkbox" :value="selected.pentatonic" v-model="selected.pentatonic" id="pentatonicCheck"/>
+                    <label for="pentatonicCheck">Pentatonic</label>
+                </div>
+                -->
+                <div class="form-control result" v-if="result">
+                    <div>Scale</div>
                     <ul v-if="result" class="result-scale">
                         <li v-for="(note, index) in result" v-bind:key="index">
                             {{ note.name }}
                         </li>
                     </ul>
-                    <ul v-if="messages">
-                        <li v-for="(message, index) in messages" v-bind:key="index">
+                    <div v-if="messages">
+                        <span v-for="(message, index) in messages" v-bind:key="index">
                             {{ message }}
-                        </li>
-                    </ul>
+                        </span>
+                    </div>
                 </div>
-            </fieldset>
+                <div class="form-control" v-if="result">
+                    <button v-on:click="clear()">
+                        <img src="delete.svg">
+                        Clear
+                    </button>
+                </div>
+            </div>
+            
         </form>
 
     </div>
@@ -63,7 +71,7 @@ export default {
             scales: SCALES,
             tonics: NOTES,
             selected: {
-                scale: null,
+                scale: '',
                 tonic: null,
                 pentatonic: false
             },
@@ -89,7 +97,7 @@ export default {
             }
         },
         getScale: function(_scale, _tonic, _pentatonic) {
-            console.log('vfg apply pentatonic', _scale, _tonic, _pentatonic);
+            console.log('TODO pentatonic', _pentatonic);
             return _scale.getScale(_tonic);
         },
         submit: function() {
@@ -110,11 +118,13 @@ export default {
         'selected.scale': function(value) {
             if (this.validate()) {
                 this.result = this.getScale(value, this.selected.tonic, this.selected.pentatonic);
+                this.submit();
             }
         }, 
         'selected.tonic': function(value) {
             if (this.validate()) {
                 this.result = this.getScale(this.selected.scale, value, this.selected.pentatonic);
+                this.submit();
             }
         }, 
         'selected.pentatonic': function(value) {
@@ -127,6 +137,19 @@ export default {
 
 <style scoped>
 
+.scale-filter {
+    max-width: 1000px;
+    margin: auto;
+}
+
+form > div {
+    display: flex;
+}
+
+ul.result-scale {
+    padding: 9px 0px;
+    margin: 0px;
+}
 
 ul.result-scale li {
     display: inline;
@@ -139,4 +162,37 @@ ul.result-scale li:last-of-type {
     border-right: unset;
 }
 
+form {
+    position: relative;
+}
+
+div.form-control {
+    margin-right: 20px;
+}
+
+div.form-control:last-of-type {
+    margin-right: 0px;
+}
+
+div.form-control button {
+    position: absolute;
+    bottom: 16px;
+    height: 36px;
+    background-color: #e6e6e6;
+    color: #7b7b7b;
+    border: 1px solid;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+div.form-control button img {
+    width: 20px;
+    margin-right: 5px;
+}
+
+div.form-control button:hover {
+    cursor: pointer;
+    background-color: #cccccc;
+}
 </style>
